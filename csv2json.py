@@ -1,19 +1,7 @@
-from msilib import _Unspecified
-from re import S
-
-import re
-import numpy as np
 import os, csv, glob
 import json
 
-import matplotlib.pyplot as plt
-from matplotlib.ticker import (MultipleLocator, AutoMinorLocator)
-from zmq import THREAD_SCHED_POLICY_DFLT
-
-from stdBounding import *
-from slidingWin import *
-from stepsFilter import *
-from zNormed import *
+from datetime import datetime
 
 def readTestRsult(folderPath, filename):
 
@@ -44,7 +32,7 @@ def readTestRsult(folderPath, filename):
                 SampleId = row[0]
             if idx == 4:
                 LysisTime = row[3:]
-                LysisTime = [round(float(i), 2) for i in LysisTime if i != '']
+                LysisTime = [round(float(i)/1000, 2) for i in LysisTime if i != '']
             if idx == 5:
                 LysisTemp = row[3:]
                 LysisTemp = [round(float(i), 2) for i in LysisTemp if i != '']
@@ -99,21 +87,21 @@ def readTestRsult(folderPath, filename):
             
             idx += 1
 
-    dcoument['LysisTemp'] = LysisTemp
-    dcoument['LysisTime'] = LysisTime
-    dcoument['CartTemp'] = CartTemp
-    dcoument['AdcTemp'] = AdcTemp
-    dcoument['TargetName'] = TargetName
-    dcoument['WellResult'] = WellResult
-    dcoument['ECVolDiffs'] = ECVolDiffs
-    dcoument['SampleId'] = SampleId
+    dcoument["LysisTemp"] = LysisTemp
+    dcoument["LysisTime"] = LysisTime
+    dcoument["CartTemp"] = CartTemp
+    dcoument["AdcTemp"] = AdcTemp
+    dcoument["TargetName"] = TargetName
+    dcoument["WellResult"] = WellResult
+    dcoument["ECVolDiffs"] = ECVolDiffs
+    dcoument["SampleId"] = SampleId
 
-    dcoument['ReactTime'] = ReactTime
-    dcoument['Well1Readings'] = Well1Readings
-    dcoument['Well2Readings'] = Well2Readings
-    dcoument['Well3Readings'] = Well3Readings
-    dcoument['Well4Readings'] = Well4Readings
-    dcoument['Well5Readings'] = Well5Readings
+    dcoument["ReactTime"] = ReactTime
+    dcoument["Well1Readings"] = Well1Readings
+    dcoument["Well2Readings"] = Well2Readings
+    dcoument["Well3Readings"] = Well3Readings
+    dcoument["Well4Readings"] = Well4Readings
+    dcoument["Well5Readings"] = Well5Readings
 
     return dcoument
 
@@ -132,6 +120,9 @@ def readTestlog(filename):
             #print(row)
             docItem = {}
             for idx, header in enumerate(headers):
+                if header == 'TestDate':
+                    docItem[header] = datetime.strptime(row[idx], '%m/%d/%Y').date()
+                    continue
                 docItem[header] = row[idx]
             collection.append(docItem)
     return collection
@@ -148,17 +139,17 @@ def Merge(dict1, dict2):
     return(dict2.update(dict1))
 
 if __name__=='__main__':
-    csvfoler = os.path.join(os.path.dirname(__file__), 'test')
+    csvfoler = os.path.join(os.path.dirname(__file__), 'dataPool')
     filenames = sorted(glob.glob(os.path.join(csvfoler, '*.csv')))
     testlogFile = "S2R_testlog.csv"
     testlogCollection = readTestlog(testlogFile)
     idxLookUp = colSearch(testlogCollection)
-    print(testlogCollection[6])
     jsonFile = "S2R_testlog.json"
 	
     with open(jsonFile,'w') as file:
 
         idx = 1
+        objList = []
         for filename in filenames:
             testID = os.path.splitext(os.path.basename(filename))[0]
             print(str(idx) + ":" + testID)
@@ -166,4 +157,7 @@ if __name__=='__main__':
             testDocument = testlogCollection[idxLookUp[testID]]
             resultDocument = readTestRsult(csvfoler, filename)
             Merge(resultDocument, testDocument)
-            json.dump(testDocument, file, indent = 2)
+            objList.append(testDocument)
+            
+            
+        json.dump(objList, file, indent = 2)

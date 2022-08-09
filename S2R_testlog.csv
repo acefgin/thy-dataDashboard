@@ -97,7 +97,7 @@ TestId,Protocol,TestDate,Location,DeviceOperator,KitOperator,DeviceId,KitId,KitL
 2021-07-22_NABITA002.35_1,,7/22/2021,CXL,Gareth Fotouhi,Gareth Fotouhi,NABITA002.35,NBSC20118,51921001,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,98.2,49.7,73.5,177,67,
 2021-07-22_NABITA004.21_1,,7/22/2021,CXL,Jackie Mercader,Jackie Mercader,NABITA004.21,,OQ2,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,128.2,124.3,112.8,237.4,212,Day 1
 2021-07-22_NABITA002.35_2,,7/22/2021,CXL,Gareth Fotouhi,Gareth Fotouhi,NABITA002.35,NBSC20116,51921001,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,68.6,51.6,82.9,108.9,95.8,Switched syringe+diluent buffer out from kit with in-house made syringe loaded with yellow-tinted diluent buffer 
-2021-07-22_NABITA002.35_2,,7/22/2021,CXL,Jackie Mercader,Jackie Mercader,NABITA002.35,,OQ2,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,122.6,92.3,118.2,214.7,179.5,Day 1
+2021-07-22_NABITA002.35_3,,7/22/2021,CXL,Jackie Mercader,Jackie Mercader,NABITA002.35,,OQ2,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,122.6,92.3,118.2,214.7,179.5,Day 1
 2021-07-23_NABITA002.35_1,,7/23/2021,CXL,Gareth Fotouhi,Gareth Fotouhi,NABITA002.35,,OQ1,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,149.5,155.3,139.9,235.9,236.8,Day 3
 2021-07-23_NABITA004.21_1,,7/23/2021,CXL,Gareth Fotouhi,Gareth Fotouhi,NABITA004.21,,OQ1,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,130.2,139.5,119.8,203.7,231.3,Day 3
 2021-07-23_NABITA002.35_2,,7/23/2021,CXL,Gareth Fotouhi,Gareth Fotouhi,NABITA002.35,,OQ3,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,181.2,120.4,127.8,235.4,239.8,Day 1
@@ -177,7 +177,7 @@ TestId,Protocol,TestDate,Location,DeviceOperator,KitOperator,DeviceId,KitId,KitL
 2021-08-17_NABITA003.37_9,,8/17/2021,CXL,Jackie Mercader,Jackie Mercader,NABITA003.37,INSC20033,20202.0821,,Clinical - ACME,NA,unknown,Device Fail,Fail,,,,,,Device died during test; Sample 4323000 is Positive
 2021-08-27_NABITA003.37_1,,8/27/2021,CXL,Jackie Mercader,Jackie Mercader,NABITA003.37,INSC20034,20202.0821,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,78.9,74.4,97.8,361.1,23.5,
 2021-08-27_NABITA003.37_2,,8/27/2021,CXL,Jackie Mercader,Jackie Mercader,NABITA003.37,INSC20035,20202.0821,,Clinical - ACME,NA,unknown,Negative,NA,103.7,16.9,17,20,20.9,Sample 4254093 is Positive - but this was an inhibition test with no diluent added
-2021-08-31_NABITA001.23_1,,8/31/2021,CXL,Jackie Mercader,Jackie Mercader,NABITA001.23,NBSC20239,20202.0721,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,116.2,87.7,116.5,133.8,176.7,
+2021-08-30_NABITA001.23_1,,8/31/2021,CXL,Jackie Mercader,Jackie Mercader,NABITA001.23,NBSC20239,20202.0721,,Positive - GINW7.65K,Positive,"7,650",Positive,Yes,116.2,87.7,116.5,133.8,176.7,
 2021-09-01_NABITA001.23_1,,9/1/2021,CXL,Misa Winters,Misa Winters,NABITA001.23,NBSC20241,20202.0721,,Positive - GINW1K,Positive,1000,Positive,Yes,128.2,67.1,91.8,189.6,24.3,
 2021-09-01_NABITA001.23_2,,9/1/2021,CXL,Jackie Mercader,Jackie Mercader,NABITA001.23,NBSC20279,20202.0821,,Positive - GINW400,Positive,400,Positive,Yes,132.1,44.4,107.4,0,46.4,
 2021-09-03_NABITA003.37_1,S2R,9/3/2021,CXL,Jackie Mercader,Jackie Mercader,NABITA003.37,NBSC20258,20202.0821,,Positive - GINW1K,Positive,1000,Device Fail,Fail,,,,,,Device died during test

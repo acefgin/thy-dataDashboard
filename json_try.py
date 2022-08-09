@@ -39,7 +39,7 @@ Value = list(filter(find, todos))
 
 with open("sample.json", "w") as data:
 	# Value = list(filter(keep, todos))
-	json.dump(Value, data, indent = 2)
+	print(json.dump(Value, data, indent = 2))
 
 curUser = 0
 cur_max = 0
