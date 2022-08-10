@@ -120,9 +120,9 @@ def readTestlog(filename):
             #print(row)
             docItem = {}
             for idx, header in enumerate(headers):
-                if header == 'TestDate':
-                    docItem[header] = datetime.strptime(row[idx], '%m/%d/%Y').date()
-                    continue
+                # if header == 'TestDate':
+                #     docItem[header] = datetime.strptime(row[idx], '%m/%d/%Y').date()
+                #     continue
                 docItem[header] = row[idx]
             collection.append(docItem)
     return collection
