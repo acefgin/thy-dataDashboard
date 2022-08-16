@@ -132,6 +132,7 @@ class graphWidget(QtWidgets.QGraphicsView):
         self.graphWidget.setBackground('w')
     
     def curvesPlot(self, testLog):
+        self.graphWidget.clear()
         CHANNELNUM = 5
         time = testLog['ReactTime']
         targetName = testLog['TargetName']
@@ -146,7 +147,7 @@ class graphWidget(QtWidgets.QGraphicsView):
             smoothedSignals.append(self.smooth(np.array(chList[i])))
 
         featList = np.zeros((5,4))
-        lnColorLs = ['r', '#35ff35', '#3535ff', '#35ffff', '#35ffff']
+        lnColorLs = ['r', '#35ff35', '#3535ff', '#35ffff', '#ff35ff']
         for i in range(CHANNELNUM):
             _, diff, cp, stepWidth, avgRate= self.labelSteps(smoothedSignals[i])
             if diff == 0 and len(smoothedSignals[i]) >= 50:

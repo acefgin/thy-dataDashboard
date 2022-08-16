@@ -36,11 +36,14 @@ class dbItemListWidget(QListWidget):
         for test in testItems:
             self.addItem(test["TestId"])
 
+    def connectModel(self, graphW):
+        self.graphW = graphW
+
     def getItem(self, lstItem):
         TestId = lstItem.text()
         selectedTest = self.db.find_one({"TestId": TestId})
         
-        print(selectedTest["Well1"])
+        self.graphW.curvesPlot(selectedTest)
         
     
 if __name__ == '__main__':
