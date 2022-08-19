@@ -95,6 +95,8 @@ class dbPlotWidget(QtWidgets.QGraphicsView):
         #Set Range
         self.canvas.axes.set_xlim(0, 1800)
         self.canvas.axes.set_ylim(0, 600)
+
+        return featList
         
 
 

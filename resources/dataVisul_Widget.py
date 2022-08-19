@@ -96,6 +96,12 @@ class dataVisualWidget_Form(object):
         font.setPointSize(5)
         item.setFont(font)
         self.tableWidget.setItem(0, 0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(0, 4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(1, 4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setItem(2, 4, item)
         self.gridLayout_2.addWidget(self.tableWidget, 1, 0, 1, 1)
         self.verticalLayout_2.addWidget(self.frame_2)
         self.frame = QtWidgets.QFrame(Form)
@@ -166,6 +172,14 @@ class dataVisualWidget_Form(object):
         item.setText(_translate("Form", "GeneM_2"))
         __sortingEnabled = self.tableWidget.isSortingEnabled()
         self.tableWidget.setSortingEnabled(False)
+        item = self.tableWidget.item(0, 0)
+        item.setText(_translate("Form", "1"))
+        item = self.tableWidget.item(0, 4)
+        item.setText(_translate("Form", "1"))
+        item = self.tableWidget.item(1, 4)
+        item.setText(_translate("Form", "1"))
+        item = self.tableWidget.item(2, 4)
+        item.setText(_translate("Form", "1"))
         self.tableWidget.setSortingEnabled(__sortingEnabled)
         self.checkBox.setText(_translate("Form", "CheckBox"))
         self.checkBox_2.setText(_translate("Form", "CheckBox"))
@@ -173,7 +187,6 @@ class dataVisualWidget_Form(object):
         self.checkBox_4.setText(_translate("Form", "CheckBox"))
         self.checkBox_5.setText(_translate("Form", "CheckBox"))
 from views.myPlotWidget import dbPlotWidget
-# from controllers.dataProcessing import graphWidget
 
 
 if __name__ == "__main__":
