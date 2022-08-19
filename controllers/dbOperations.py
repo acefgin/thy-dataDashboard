@@ -23,21 +23,46 @@ def queryDB(collection, query):
     return collection.find_one(query)
 
 class dbItemListWidget(QListWidget):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super(dbItemListWidget, self).__init__(parent)
         self.resize(500, 500)
         self.setStyleSheet('font-size: 16px;')
-        self.itemDoubleClicked.connect(self.getItem)
+        self.connectDB()
+        self.loadItemFromDB()
+        self.getItemsForCombobox()
+    
+    def __del__(self):
+        self.client.close()
+    
+    def connectDB(self, dbName = 'thy_testsDB', collectionName = 's2r_testlog'):
+        self.client = pymongo.MongoClient('mongodb://localhost:27017')
+        db = self.client[dbName]
+        self.testLogCol = db[collectionName]
 
-    def loadItemFromDB(self, db):
-        testItems = db.find()
-        self.db = db
-       
-        for test in testItems:
+    def loadItemFromDB(self):
+        self.totalTestItems = self.testLogCol.find()
+        
+        for test in self.totalTestItems:
             self.addItem(test["TestId"])
+    
+    def updateListItem(self, key, value):
+        query = {}
+        query[key] = value
+        print(query)
+        if value == 'All':
+            curItems = self.testLogCol.find()
+        else:
+            curItems = self.testLogCol.find(query)
+        self.clear()
 
-    def connectModel(self, graphW):
-        self.graphW = graphW
+        for item in curItems:
+            self.addItem(item["TestId"])
+
+    def getItemsForCombobox(self):
+        self.keyList = ["Input", "Location", "AsExpected"]
+        self.cbboxItemsSets = []
+        for key in self.keyList:
+            self.cbboxItemsSets.append(self.testLogCol.distinct(key))
 
     def getItem(self, lstItem):
         TestId = lstItem.text()

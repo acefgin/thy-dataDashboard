@@ -1,6 +1,7 @@
 from controllers.dataProcessing import *
 from resources.mainView import *
 from controllers.dbOperations import *
+# from views.mainWin import *
 
 
 if __name__ == "__main__":
@@ -19,3 +20,12 @@ if __name__ == "__main__":
     ui.graphicsView.graphWidget.resize(size * 0.96)
     
     sys.exit(app.exec_())
+
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     MainWindow = QtWidgets.QMainWindow()
+#     ui = Ui_MainWindow()
+#     ui.setupUi(MainWindow)
+#     MainWindow.show()
+#     sys.exit(app.exec_())

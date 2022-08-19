@@ -1,5 +1,5 @@
-from dataVisul_Widget import dataVisualWidget_Form
-from dbList_Widget import dbListWidget_Form
+from resources.dataVisul_Widget import dataVisualWidget_Form
+from resources.dbList_Widget import dbListWidget_Form
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
