@@ -24,7 +24,7 @@ class dataVisualWidget_Form(object):
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.graphicsView = QtWidgets.QGraphicsView(Form)
+        self.graphicsView = dbPlotWidget(Form)
         self.graphicsView.setObjectName("graphicsView")
         self.verticalLayout_2.addWidget(self.graphicsView)
         self.frame_2 = QtWidgets.QFrame(Form)
@@ -172,13 +172,15 @@ class dataVisualWidget_Form(object):
         self.checkBox_3.setText(_translate("Form", "CheckBox"))
         self.checkBox_4.setText(_translate("Form", "CheckBox"))
         self.checkBox_5.setText(_translate("Form", "CheckBox"))
+from views.myPlotWidget import dbPlotWidget
+# from controllers.dataProcessing import graphWidget
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = dataVisualWidget_Form()
+    ui = Ui_Form()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())

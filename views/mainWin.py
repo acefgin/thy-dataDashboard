@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QGraphicsScene
 
 
 class Ui_MainWindow(object):
@@ -21,6 +22,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.widget = dataVisual_Widget(self.centralwidget)
         self.widget.setObjectName("widget")
+        # self.scene = QGraphicsScene()
+        # self.widget.graphicsView.setScene(self.scene)
+        # self.scene.addWidget(self.widget.graphicsView)
         self.horizontalLayout.addWidget(self.widget)
         self.widget_2 = dbList_Widget(self.centralwidget)
         self.widget_2.setObjectName("widget_2")

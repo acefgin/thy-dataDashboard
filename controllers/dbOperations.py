@@ -4,6 +4,7 @@ import gridfs
 import os
 import sys      
 from PyQt5.QtWidgets import QApplication, QWidget, QListWidget, QListWidgetItem
+from PyQt5.QtCore import pyqtSignal
 
 def connectDB(dbName, collectionName):
     client = pymongo.MongoClient('mongodb://localhost:27017')
@@ -23,6 +24,7 @@ def queryDB(collection, query):
     return collection.find_one(query)
 
 class dbItemListWidget(QListWidget):
+    onClickSignal = pyqtSignal(dict)
     def __init__(self, parent=None):
         super(dbItemListWidget, self).__init__(parent)
         self.resize(500, 500)
@@ -30,6 +32,8 @@ class dbItemListWidget(QListWidget):
         self.connectDB()
         self.loadItemFromDB()
         self.getItemsForCombobox()
+
+        self.itemDoubleClicked.connect(self.onClicked)
     
     def __del__(self):
         self.client.close()
@@ -63,12 +67,12 @@ class dbItemListWidget(QListWidget):
         self.cbboxItemsSets = []
         for key in self.keyList:
             self.cbboxItemsSets.append(self.testLogCol.distinct(key))
-
-    def getItem(self, lstItem):
+    
+    def onClicked(self, lstItem):
         TestId = lstItem.text()
-        selectedTest = self.db.find_one({"TestId": TestId})
+        selectedTest = self.testLogCol.find_one({"TestId": TestId})
         
-        self.graphW.curvesPlot(selectedTest)
+        self.onClickSignal.emit(selectedTest)
         
     
 if __name__ == '__main__':

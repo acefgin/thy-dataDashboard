@@ -6,14 +6,11 @@ from controllers.dbOperations import connectDB, queryDB
 def setupui(mainWindow):
     MainWindow.setCentralWidget()
 
-if __name__ == "__main__":
-    import sys
+def onClickSlot(a):
+    print(a["Well1"])
 
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    widget1 = dbList_Widget()
-    MainWindow.setCentralWidget(widget1)
-    MainWindow.setGeometry(200, 200, 320, 720)
+def listWidgetCtrl(widget1):
+    widget1.listWidget.onClickSignal.connect(onClickSlot)
     cbboxItems = widget1.listWidget.cbboxItemsSets
     keylist = widget1.listWidget.keyList
     widget1.comboBox.addItem("All")
@@ -33,5 +30,15 @@ if __name__ == "__main__":
             widget1.comboBox_2.currentTextChanged.connect(lambda value: widget1.listWidget.updateListItem(keylist[1], value))
         elif i == 2:
             widget1.comboBox_3.currentTextChanged.connect(lambda value: widget1.listWidget.updateListItem(keylist[2], value))
+
+if __name__ == "__main__":
+    import sys
+
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    widget1 = dbList_Widget()
+    MainWindow.setCentralWidget(widget1)
+    MainWindow.setGeometry(200, 200, 320, 720)
+    listWidgetCtrl(widget1)
     MainWindow.show()
     sys.exit(app.exec_())

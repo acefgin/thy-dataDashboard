@@ -1,4 +1,3 @@
-import random
 import pymongo
 import sys
 import numpy as np
@@ -32,8 +31,8 @@ class MplCanvas(FigureCanvas):
 
 
 class dbPlotWidget(QtWidgets.QGraphicsView):
-    def __init__(self, *args, **kargs):
-        super(dbPlotWidget, self).__init__(*args, **kargs)
+    def __init__(self, parent=None):
+        super(dbPlotWidget, self).__init__(parent)
         self.canvas = MplCanvas(self, width=24, height=6, dpi=40)
         plt.style.use('seaborn-bright')
         plt.rc('axes', linewidth=2)
@@ -48,6 +47,7 @@ class dbPlotWidget(QtWidgets.QGraphicsView):
         self.centralwidget.setLayout(layout)
 
     def curvesPlot(self, testLog):
+        print("run")
         self.canvas.axes.cla() # Clear the canvas.
         CHANNELNUM = 5
         time = testLog['ReactTime']
