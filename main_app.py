@@ -22,8 +22,8 @@ from views.myPlotWidget import *
     
 #     sys.exit(app.exec_())
 
-def listWidgetCtrl(lsWidget, plotWidget):
-    lsWidget.listWidget.onClickSignal.connect(plotWidget.curvesPlot)
+def listWidgetCtrl(lsWidget, dataInfoWidget):
+    lsWidget.listWidget.onClickSignal.connect(dataInfoWidget.updateTestInfo)
     cbboxItems = lsWidget.listWidget.cbboxItemsSets
     keylist = lsWidget.listWidget.keyList
     lsWidget.comboBox.addItem("All")
@@ -44,8 +44,27 @@ def listWidgetCtrl(lsWidget, plotWidget):
         elif i == 2:
             lsWidget.comboBox_3.currentTextChanged.connect(lambda value: lsWidget.listWidget.updateListItem(keylist[2], value))
 
-def dataVisualWidgetCtrl(dataVisualWidget):
-    dataVisualWidget.addWidget(dataVisualWidget)
+def testInfoWidgetCtrl(widget):
+    client, testLogs = connectDB('thy_testsDB', 's2r_testlog')
+    testLog = queryDB(testLogs, {"TestId": "2022-06-22_NABITA010.10_3"})
+    client.close()
+    labelTexts = [testLog["Input"], testLog["Protocol"], testLog["TestDate"]]
+    widget.label_2.setText(labelTexts[0])
+    widget.label_4.setText(labelTexts[1])
+    widget.label_6.setText(labelTexts[2])
+    featList = widget.graphicsView.curvesPlot(testLog)
+
+    qTable = widget.tableWidget
+
+    for c in range(5):
+        for r in range(3):
+            if r == 0:
+                item = QtWidgets.QTableWidgetItem(str(featList[c][0]))
+            elif r == 1:
+                item = QtWidgets.QTableWidgetItem(str(featList[c][3]))
+            elif r == 2:
+                item = QtWidgets.QTableWidgetItem(str(featList[c][1]))
+            qTable.setItem(r, c, item)
 
 
 class mainAppWindow(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -57,7 +76,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = mainAppWindow()
-    listWidgetCtrl(MainWindow.widget_2, MainWindow.widget.graphicsView)
-    # dataVisualWidgetCtrl(MainWindow.widget.graphicsView)
+    listWidgetCtrl(MainWindow.widget_2, MainWindow.widget)
+    # testInfoWidgetCtrl(MainWindow.widget)
     MainWindow.show()
     sys.exit(app.exec_())

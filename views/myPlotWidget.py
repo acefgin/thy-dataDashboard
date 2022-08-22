@@ -45,10 +45,15 @@ class dbPlotWidget(QtWidgets.QGraphicsView):
         # Create a placeholder widget to hold our toolbar and canvas.
         self.centralwidget = QtWidgets.QWidget()
         self.centralwidget.setLayout(layout)
+        # self.scene = QtWidgets.QGraphicsScene(self.centralwidget)
+        # self.setScene(self.scene)
+        # self.show()
+        self.curvesList = []
 
     def curvesPlot(self, testLog):
         print("run")
-        self.canvas.axes.cla() # Clear the canvas.
+        self.curvesList = []
+        self.canvas.axes.cla()
         CHANNELNUM = 5
         time = testLog['ReactTime']
         targetName = testLog['TargetName']
@@ -69,7 +74,9 @@ class dbPlotWidget(QtWidgets.QGraphicsView):
             if diff == 0 and len(smoothedSignals[i]) >= 50:
                 diff = round(self.consecutiveSum(np.diff(smoothedSignals[i]), 50), 1)
             featList[i] = [diff, cp, stepWidth, avgRate]
-            self.plot(time, chList[i], targetName[i], lnColorLs[i])
+            ln = self.plot(time, chList[i], targetName[i], lnColorLs[i])
+            # print(ln)
+            self.curvesList.append(ln)
 
         # Add Title
         title = '{}_{}'.format(testId, input)
@@ -96,13 +103,20 @@ class dbPlotWidget(QtWidgets.QGraphicsView):
         self.canvas.axes.set_xlim(0, 1800)
         self.canvas.axes.set_ylim(0, 600)
 
+        self.canvas.draw()
         return featList
         
-
-
     def plot(self, x, y, plotname, color):
-        self.canvas.axes.plot(x, y, color = color, linewidth = 2, label = plotname)
-        # Trigger the canvas to update and redraw.
+        ln, = self.canvas.axes.plot(x, y, color = color, linewidth = 2, label = plotname)
+        print(ln)
+        return ln
+    
+    def toggleCurve(self, status, index):
+        if status:
+            self.curvesList[index].set_alpha(1)
+        else:
+            self.curvesList[index].set_alpha(0)
+        
         self.canvas.draw()
 
     def smooth(self, x,window_len=10,window='hanning'):
