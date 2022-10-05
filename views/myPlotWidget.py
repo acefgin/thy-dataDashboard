@@ -108,7 +108,6 @@ class dbPlotWidget(QtWidgets.QGraphicsView):
         
     def plot(self, x, y, plotname, color):
         ln, = self.canvas.axes.plot(x, y, color = color, linewidth = 2, label = plotname)
-        print(ln)
         return ln
     
     def toggleCurve(self, status, index):

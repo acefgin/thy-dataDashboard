@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QListWidget, QListWidgetItem
 from PyQt5.QtCore import pyqtSignal
 
 def connectDB(dbName, collectionName):
-    client = pymongo.MongoClient('mongodb://localhost:27017')
+    client = pymongo.MongoClient('mongodb+srv://cifeng:cxldnabit@cluster0.kathwyh.mongodb.net/test')
     db = client[dbName]
     collection = db[collectionName]
     return client, collection
@@ -39,7 +39,7 @@ class dbItemListWidget(QListWidget):
         self.client.close()
     
     def connectDB(self, dbName = 'thy_testsDB', collectionName = 's2r_testlog'):
-        self.client = pymongo.MongoClient('mongodb://localhost:27017')
+        self.client = pymongo.MongoClient('mongodb+srv://cifeng:cxldnabit@cluster0.kathwyh.mongodb.net/test')
         db = self.client[dbName]
         self.testLogCol = db[collectionName]
 
