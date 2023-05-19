@@ -19,17 +19,18 @@ def json_parse(fileobj, decoder=JSONDecoder(), buffersize=2048):
 from pprint import pprint
 from pymongo import InsertOne, DeleteMany, ReplaceOne, UpdateOne
 
-client = pymongo.MongoClient('mongodb://localhost:27017')
-db = client['mytest_db']
-collection = db['mytest_collection']
-requesting = []
+def writeMongoDB(jsonFile):
+    
+    client = pymongo.MongoClient('mongodb://localhost:27017')
+    db = client['testDB']
+    collection = db['test']
+    requesting = []
 
-with open(r'sample.json') as f:
-    myDicts = json.load(f)
-    # print(type(myDicts))
-    for myDict in myDicts:
-        requesting.append(InsertOne(myDict))
-    print(requesting)
+    with open(jsonFile, 'r') as f:
+        myDicts = json.load(f)
+        # print(type(myDicts))
+        for myDict in myDicts:
+            requesting.append(InsertOne(myDict))
 
-result = collection.bulk_write(requesting)
-client.close()
+    result = collection.bulk_write(requesting)
+    client.close()

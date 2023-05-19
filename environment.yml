@@ -1,0 +1,5 @@
+name: pyQt5
+dependencies:
+  - numpy
+  - pymongo
+  - matplotlib
